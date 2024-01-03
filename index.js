@@ -4,10 +4,15 @@ import express from 'express';
 // import morgan from 'morgan';
 // import cors from 'cors';
 import mongoose from 'mongoose';
-import UserRouter from './routes/user_routes.js';
-// const express = require('express');
 import bodyParser from 'body-parser';
+// const express = require('express');
+
+//routes
+import UserRouter from './routes/user_routes.js';
 import categoryRoutes from './routes/category_routes.js';
+import productRoutes from './routes/product_routes.js';
+import cartRoutes from './routes/cart_routes.js';
+import orderRoutes from './routes/order_routes.js';
 // const helmet = require('helmet');
 // const morgan = require('morgan');
 // const cors = require('cors');
@@ -30,10 +35,13 @@ mongoose.connect("mongodb+srv://shivani123:shivi%40123@cluster0.hvm8wx5.mongodb.
 
 app.use("/api/user", UserRouter);
 app.use("/api/category", categoryRoutes);
+app.use("/api/product", productRoutes);
+app.use("/api/cart", cartRoutes);
+app.use("/api/order", orderRoutes);
 
 app.get('/', (req, res) => {
     res.send('Hello World!');
-   // res.json({s: true, msg: "jsgdjhs"});
+    // res.json({s: true, msg: "jsgdjhs"});
 });
 
 app.listen(3000, () => console.log('Server started at port 3000!'));

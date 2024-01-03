@@ -39,7 +39,7 @@ const userController = {
             const userData = req.body;
             console.log(userData);
 
-            const foundUser = await UserModel.findOne({ email: userData.email });
+            const foundUser = await UserModel.findOne({ email: userData.email }); // get singal user that matches with given email
             console.log(foundUser);
 
             if (!foundUser) {
