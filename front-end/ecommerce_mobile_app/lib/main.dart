@@ -1,0 +1,64 @@
+import 'package:ecommerce_mobile_app/core/routes.dart';
+import 'package:ecommerce_mobile_app/core/ui.dart';
+import 'package:ecommerce_mobile_app/logic/cubit/user_cubit/user_cubit.dart';
+import 'package:ecommerce_mobile_app/presentation/pages/login_page/login_page.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+void main() {
+  //debugPaintSizeEnabled = true;
+  Bloc.observer = MyBlocObserver();
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => UserCubit()),
+      ],
+      child: MaterialApp(
+        theme: Themes.defaultTheme,
+        debugShowCheckedModeBanner: false,
+        initialRoute: LoginPage.routeName,
+        onGenerateRoute: Routes.onGenerateRoute,
+      ),
+    );
+  }
+}
+
+class MyBlocObserver extends BlocObserver {
+  @override
+  void onCreate(BlocBase bloc) {
+    print("Created: $bloc");
+    super.onCreate(bloc);
+  }
+
+  @override
+  void onChange(BlocBase bloc, Change change) {
+    print("Change in: $bloc: $change");
+    super.onChange(bloc, change);
+  }
+
+  @override
+  void onTransition(Bloc bloc, Transition transition) {
+    print("Transition change in: $bloc: $transition");
+    super.onTransition(bloc, transition);
+  }
+
+  @override
+  void onClose(BlocBase bloc) {
+    print("Closed: $bloc");
+    super.onClose(bloc);
+  }
+
+  @override
+  void onError(BlocBase bloc, Object error, StackTrace stackTrace) {
+    print("Error in: $bloc: $error");
+    super.onError(bloc, error, stackTrace);
+  }
+}
