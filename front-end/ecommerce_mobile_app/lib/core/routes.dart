@@ -1,5 +1,6 @@
 import 'package:ecommerce_mobile_app/presentation/pages/home_page/home_page.dart';
 import 'package:ecommerce_mobile_app/presentation/pages/login_page/login_page.dart';
+import 'package:ecommerce_mobile_app/presentation/pages/product_details_page/product_details_page.dart';
 import 'package:ecommerce_mobile_app/presentation/pages/splash_page.dart';
 import 'package:ecommerce_mobile_app/presentation/providers/login_provider.dart';
 import 'package:ecommerce_mobile_app/presentation/pages/login_page/signup_page.dart';
@@ -29,6 +30,10 @@ class Routes {
       case HomePage.routeName:
         return MaterialPageRoute(
           builder: (_) => const HomePage(),
+        );
+      case ProductDetailsPage.routeName:
+        return MaterialPageRoute(
+          builder: (_) => const ProductDetailsPage(),
         );
 
       default:

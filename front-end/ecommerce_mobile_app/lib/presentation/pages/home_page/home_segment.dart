@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ecommerce_mobile_app/core/ui.dart';
 import 'package:ecommerce_mobile_app/logic/cubit/product_cubit/product_cubit.dart';
 import 'package:ecommerce_mobile_app/logic/cubit/product_cubit/product_state.dart';
+import 'package:ecommerce_mobile_app/presentation/pages/product_details_page/product_details_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -39,45 +40,52 @@ class _HomeSegmentState extends State<HomeSegment> {
             var product = state.products[index];
             return Padding(
               padding: const EdgeInsets.only(bottom: 20),
-              child: Row(
-                children: [
-                  CachedNetworkImage(
-                      width: MediaQuery.of(context).size.width / 3,
-                      imageUrl:
-                          'https://res.cloudinary.com/demo/image/upload/v1312461204/sample.jpg'),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 25),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            product.title!,
-                            style: TextStyles.heading4
-                                .copyWith(fontWeight: FontWeight.bold),
-                          ),
-                          Text(
-                            // product.description!.isEmpty
-                            //     ? product.description!
-                            //     :
-                            "No description",
-                            style: TextStyles.body2.copyWith(
-                              color: AppColors.textLight,
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.of(context).pushNamed(ProductDetailsPage.routeName);
+                },
+                child: Row(
+                  children: [
+                    CachedNetworkImage(
+                        width: MediaQuery.of(context).size.width / 3,
+                        imageUrl:
+                            'https://res.cloudinary.com/demo/image/upload/v1312461204/sample.jpg'),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 25),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              product.title!,
+                              style: TextStyles.heading4
+                                  .copyWith(fontWeight: FontWeight.bold),
                             ),
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 2,
-                          ),
-                          //  Gap(),
-                          Text(
-                            "₹ ${product.price}",
-                            style: TextStyles.heading3,
-                          ),
-                        ],
+                            Text(
+                              // product.description!.isEmpty
+                              //     ? product.description!
+                              //     :
+                              "No description",
+                              style: TextStyles.body2.copyWith(
+                                color: AppColors.textLight,
+                              ),
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 2,
+                            ),
+                            //  Gap(),
+                            Text(
+                              "₹ ${product.price}",
+                              style: TextStyles.heading3,
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  IconButton(onPressed: () {}, icon: const Icon(Icons.shopping_cart_outlined))
-                ],
+                    IconButton(
+                        onPressed: () {},
+                        icon: const Icon(Icons.shopping_cart_outlined))
+                  ],
+                ),
               ),
             );
           },
