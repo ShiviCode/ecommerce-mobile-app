@@ -2,7 +2,7 @@ import 'package:ecommerce_mobile_app/data/models/user_model.dart';
 
 abstract class UserState {}
 
-class UserInitialStete extends UserState {}
+class UserInitialState extends UserState {}
 
 class UserLodingState extends UserState {}
 

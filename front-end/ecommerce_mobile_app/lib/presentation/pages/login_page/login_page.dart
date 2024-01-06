@@ -1,7 +1,7 @@
 import 'package:ecommerce_mobile_app/core/ui.dart';
 import 'package:ecommerce_mobile_app/logic/cubit/user_cubit/user_cubit.dart';
 import 'package:ecommerce_mobile_app/logic/cubit/user_cubit/user_state.dart';
-import 'package:ecommerce_mobile_app/presentation/pages/home_page/home_page.dart';
+import 'package:ecommerce_mobile_app/presentation/pages/splash_page.dart';
 import 'package:ecommerce_mobile_app/presentation/providers/login_provider.dart';
 import 'package:ecommerce_mobile_app/presentation/pages/login_page/signup_page.dart';
 import 'package:ecommerce_mobile_app/widgets/gap_widget.dart';
@@ -29,8 +29,8 @@ class _LoginPageState extends State<LoginPage> {
     var loginProvider = Provider.of<LoginProvider>(context);
     return BlocListener<UserCubit, UserState>(
       listener: (context, state) {
-        Navigator.of(context).popUntil((route) => route.isFirst);
-        Navigator.of(context).pushNamed(HomePage.routeName);
+        // Navigator.of(context).popUntil((route) => route.isFirst);
+        Navigator.of(context).pushNamed(SplashPage.routeName);
       },
       child: Scaffold(
         appBar: AppBar(

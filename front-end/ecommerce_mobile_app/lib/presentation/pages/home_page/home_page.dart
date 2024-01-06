@@ -1,7 +1,10 @@
+import 'package:ecommerce_mobile_app/presentation/pages/home_page/category_segment.dart';
+import 'package:ecommerce_mobile_app/presentation/pages/home_page/home_segment.dart';
+import 'package:ecommerce_mobile_app/presentation/pages/home_page/profile_segement.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
-   static const routeName = "/home";
+  static const routeName = "/home";
   const HomePage({super.key});
 
   @override
@@ -9,8 +12,38 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  int currentIndex = 0;
+  List<Widget> segments = [
+    const HomeSegment(),
+    const CategorySegment(),
+    const ProfileSegement()
+  ];
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Ecommerce app"),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.shopping_cart),
+            onPressed: () {},
+          ),
+        ],
+      ),
+      body: segments[currentIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        onTap: (index) {
+          currentIndex = index;
+          setState(() {});
+        },
+        currentIndex: currentIndex,
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.category), label: "Category"),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile")
+        ],
+      ),
+    );
   }
 }

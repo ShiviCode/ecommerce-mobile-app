@@ -1,13 +1,27 @@
 import 'package:ecommerce_mobile_app/data/models/user_model.dart';
-import 'package:ecommerce_mobile_app/data/repositories/user_repositories.dart';
+import 'package:ecommerce_mobile_app/data/repositories/user_repository.dart';
 import 'package:ecommerce_mobile_app/logic/cubit/user_cubit/user_state.dart';
 import 'package:ecommerce_mobile_app/logic/services/local_storage.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 // App State
 class UserCubit extends Cubit<UserState> {
-  UserCubit() : super(UserInitialStete());
+  UserCubit() : super(UserInitialState()) {
+    _initialize();
+  }
   final UserRepository _userRepository = UserRepository(); // service or api
+
+  void _initialize() async {
+    final userDetails = await LocalStorage.fetchUserDetails();
+    String? email = userDetails["email"];
+    String? password = userDetails["password"];
+
+    if (email == null || password == null) {
+      emit(UserLoggedOutState());
+    } else {
+      signIn(email: email, password: password);
+    }
+  }
 
   void emitUserLoggedInState(
       {required UserModel userModel,
@@ -61,5 +75,10 @@ class UserCubit extends Cubit<UserState> {
         UserErrorState(e.toString()), // Notifiying Listners
       );
     }
+  }
+
+  void signOut()async{
+    await LocalStorage.deleteUserDetails();
+    emit(UserLoggedOutState());
   }
 }

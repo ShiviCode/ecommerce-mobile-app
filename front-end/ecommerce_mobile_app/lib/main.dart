@@ -1,7 +1,9 @@
 import 'package:ecommerce_mobile_app/core/routes.dart';
 import 'package:ecommerce_mobile_app/core/ui.dart';
+import 'package:ecommerce_mobile_app/logic/cubit/category_cubit/category_cubit.dart';
+import 'package:ecommerce_mobile_app/logic/cubit/product_cubit/product_cubit.dart';
 import 'package:ecommerce_mobile_app/logic/cubit/user_cubit/user_cubit.dart';
-import 'package:ecommerce_mobile_app/presentation/pages/login_page/login_page.dart';
+import 'package:ecommerce_mobile_app/presentation/pages/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,11 +22,13 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => UserCubit()),
+        BlocProvider(create: (context) => CategoryCubit()),
+        BlocProvider(create: (context) => ProductCubit()),
       ],
       child: MaterialApp(
         theme: Themes.defaultTheme,
         debugShowCheckedModeBanner: false,
-        initialRoute: LoginPage.routeName,
+        initialRoute: SplashPage.routeName,
         onGenerateRoute: Routes.onGenerateRoute,
       ),
     );

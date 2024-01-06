@@ -48,6 +48,12 @@ class TextStyles {
     color: AppColors.text,
   );
 
+  static TextStyle heading4 = TextStyle(
+    fontSize: 20,
+    fontWeight: FontWeight.w500,
+    color: AppColors.text,
+  );
+
   static TextStyle body1 = TextStyle(
     fontSize: 18,
     fontWeight: FontWeight.normal,
