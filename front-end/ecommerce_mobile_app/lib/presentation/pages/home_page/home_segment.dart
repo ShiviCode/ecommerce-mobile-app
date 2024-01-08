@@ -42,7 +42,7 @@ class _HomeSegmentState extends State<HomeSegment> {
               padding: const EdgeInsets.only(bottom: 20),
               child: GestureDetector(
                 onTap: () {
-                  Navigator.of(context).pushNamed(ProductDetailsPage.routeName);
+                  Navigator.of(context).pushNamed(ProductDetailsPage.routeName, arguments: product);
                 },
                 child: Row(
                   children: [

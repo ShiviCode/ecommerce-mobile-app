@@ -1,3 +1,4 @@
+import 'package:ecommerce_mobile_app/data/models/product_model.dart';
 import 'package:ecommerce_mobile_app/presentation/pages/home_page/home_page.dart';
 import 'package:ecommerce_mobile_app/presentation/pages/login_page/login_page.dart';
 import 'package:ecommerce_mobile_app/presentation/pages/product_details_page/product_details_page.dart';
@@ -33,7 +34,9 @@ class Routes {
         );
       case ProductDetailsPage.routeName:
         return MaterialPageRoute(
-          builder: (_) => const ProductDetailsPage(),
+          builder: (_) =>  ProductDetailsPage(
+            productModel: settings.arguments as ProductModel,
+          ),
         );
 
       default:
