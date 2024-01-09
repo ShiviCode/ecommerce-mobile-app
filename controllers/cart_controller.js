@@ -37,14 +37,21 @@ const CartController = {
                 await newCart.save();
                 return res.json({ success: true, data: newCart, message: "Product added to cart!" });
             }
+            // Deleting the item if already exists
+            const deletedItem = await CartModel.findOneAndUpdate(
+                { user: user, "items.product": product },
+                { $pull: { items: { product: product } } },
+                { new: true }
+            );
             // if cart already exists
+            // add new item with updated quantity
             const upatedCart = await CartModel.findOneAndUpdate(
                 { user: user },// matches by user
                 { $push: { items: { product: product, quantity: quantity } } }, // update
                 { new: true } // if true this will return updated model
-            );
+            ).populate("items.product");
             // await upatedCart.save();
-            return res.json({ success: true, data: upatedCart, message: "Product added to cart!" });
+            return res.json({ success: true, data: upatedCart.items, message: "Product added to cart!" });
         }
         catch (e) {
             return res.json({ success: false, meaage: e });
@@ -59,9 +66,9 @@ const CartController = {
                 { user: user },// condition
                 { $pull: { items: { product: product } } },
                 { new: true }
-            );
+            ).populate("items.product");
             return res.json({
-                success: true, data: updatedCart, message: "Product removed from cart!"
+                success: true, data: updatedCart.items, message: "Product removed from cart!"
             });
 
         }

@@ -1,3 +1,4 @@
+import 'package:ecommerce_mobile_app/presentation/pages/cart_page/cart_page.dart';
 import 'package:ecommerce_mobile_app/presentation/pages/home_page/category_segment.dart';
 import 'package:ecommerce_mobile_app/presentation/pages/home_page/home_segment.dart';
 import 'package:ecommerce_mobile_app/presentation/pages/home_page/profile_segement.dart';
@@ -26,7 +27,9 @@ class _HomePageState extends State<HomePage> {
         actions: [
           IconButton(
             icon: const Icon(Icons.shopping_cart),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushNamed(CartPage.routeName);
+            },
           ),
         ],
       ),

@@ -1,13 +1,13 @@
 import 'package:ecommerce_mobile_app/data/models/product_model.dart';
 
-class CartModel {
+class CartItemModel {
   ProductModel? product;
   int? quantity;
   String? sId;
 
-  CartModel({this.product, this.quantity, this.sId});
+  CartItemModel({this.product, this.quantity, this.sId});
 
-  CartModel.fromJson(Map<String, dynamic> json) {
+  CartItemModel.fromJson(Map<String, dynamic> json) {
     product =
         json['product'] != null ? ProductModel.fromJson(json['product']) : null;
     quantity = json['quantity'];
@@ -17,7 +17,7 @@ class CartModel {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = Map<String, dynamic>();
     if (product != null) {
-      data['product'] = product!.toJson();
+      data['product'] = product!.sId;
     }
     data['quantity'] = quantity;
     data['_id'] = sId;

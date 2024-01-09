@@ -1,4 +1,5 @@
 import 'package:ecommerce_mobile_app/data/models/product_model.dart';
+import 'package:ecommerce_mobile_app/presentation/pages/cart_page/cart_page.dart';
 import 'package:ecommerce_mobile_app/presentation/pages/home_page/home_page.dart';
 import 'package:ecommerce_mobile_app/presentation/pages/login_page/login_page.dart';
 import 'package:ecommerce_mobile_app/presentation/pages/product_details_page/product_details_page.dart';
@@ -37,6 +38,10 @@ class Routes {
           builder: (_) =>  ProductDetailsPage(
             productModel: settings.arguments as ProductModel,
           ),
+        );
+        case CartPage.routeName:
+        return MaterialPageRoute(
+          builder: (_) => const CartPage(),
         );
 
       default:
