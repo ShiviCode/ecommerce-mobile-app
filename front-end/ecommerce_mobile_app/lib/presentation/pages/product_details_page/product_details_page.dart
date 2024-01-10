@@ -1,8 +1,11 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ecommerce_mobile_app/core/ui.dart';
 import 'package:ecommerce_mobile_app/data/models/product_model.dart';
+import 'package:ecommerce_mobile_app/logic/cubit/cart_cubit/cart_cubit.dart';
+import 'package:ecommerce_mobile_app/logic/cubit/cart_cubit/cart_state.dart';
 import 'package:ecommerce_mobile_app/widgets/gap_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProductDetailsPage extends StatefulWidget {
   static const routeName = "product-details";
@@ -47,10 +50,23 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                     style: TextStyles.heading3,
                   ),
                   const Gap(),
-                  FilledButton(
-                    onPressed: () {},
-                    child: const Text("Add to cart"),
-                  ),
+                  BlocBuilder<CartCubit, CartCubitState>(
+                      builder: (context, state) {
+                    return FilledButton(
+                      onPressed: () {
+                        if (BlocProvider.of<CartCubit>(context)
+                            .cartContains(widget.productModel)) {
+                          return;
+                        }
+                        BlocProvider.of<CartCubit>(context)
+                            .addToCart(widget.productModel, 1);
+                      },
+                      child: (BlocProvider.of<CartCubit>(context)
+                              .cartContains(widget.productModel))
+                          ? const Text("Product Added to cart")
+                          : const Text("Add to cart"),
+                    );
+                  }),
                   const Gap(),
                   Text(widget.productModel.description ?? " no description"),
                 ],
