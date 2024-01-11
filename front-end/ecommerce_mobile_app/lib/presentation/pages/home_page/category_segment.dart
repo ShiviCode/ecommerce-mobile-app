@@ -1,5 +1,6 @@
 import 'package:ecommerce_mobile_app/logic/cubit/category_cubit/category_cubit.dart';
 import 'package:ecommerce_mobile_app/logic/cubit/category_cubit/category_state.dart';
+import 'package:ecommerce_mobile_app/presentation/pages/product/category_product_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -35,7 +36,12 @@ class _CategorySegmentState extends State<CategorySegment> {
           itemBuilder: (context, index) {
             var category = state.categories[index];
             return ListTile(
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).pushNamed(
+                  CategoryProductPage.routeName,
+                  arguments: category,
+                );
+              },
               leading: const Icon(Icons.category),
               title: Text(category.title ?? "No Title"),
               trailing: const Icon(Icons.keyboard_arrow_right),

@@ -39,6 +39,7 @@ dependencies:
   intl: ^0.18.0
   carousel_slider: ^4.2.1
   input_quantity: ^2.2.0
+  badges: ^3.1.2
 
 
   # The following adds the Cupertino Icons font to your application.

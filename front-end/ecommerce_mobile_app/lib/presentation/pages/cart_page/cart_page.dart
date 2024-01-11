@@ -41,9 +41,9 @@ class _CartPageState extends State<CartPage> {
                 child: Text(state.message),
               );
             }
-            if (state.cartItems.isEmpty) {
+            if (state is CartLoadedState && state.cartItems.isEmpty) {
               return const Center(
-                child: Text('No Category'),
+                child: Text('Cart item will show here'),
               );
             }
             return Column(

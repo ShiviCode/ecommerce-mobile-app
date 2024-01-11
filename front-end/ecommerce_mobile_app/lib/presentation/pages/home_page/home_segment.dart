@@ -42,7 +42,8 @@ class _HomeSegmentState extends State<HomeSegment> {
               padding: const EdgeInsets.only(bottom: 20),
               child: GestureDetector(
                 onTap: () {
-                  Navigator.of(context).pushNamed(ProductDetailsPage.routeName, arguments: product);
+                  Navigator.of(context).pushNamed(ProductDetailsPage.routeName,
+                      arguments: product);
                 },
                 child: Row(
                   children: [
@@ -81,9 +82,10 @@ class _HomeSegmentState extends State<HomeSegment> {
                         ),
                       ),
                     ),
-                    IconButton(
-                        onPressed: () {},
-                        icon: const Icon(Icons.shopping_cart_outlined))
+                    // IconButton(
+                    //   onPressed: () {},
+                    //   icon: const Icon(Icons.shopping_cart_outlined),
+                    // ),
                   ],
                 ),
               ),

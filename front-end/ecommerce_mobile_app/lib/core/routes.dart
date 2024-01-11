@@ -1,13 +1,17 @@
+import 'package:ecommerce_mobile_app/data/models/category_model.dart';
 import 'package:ecommerce_mobile_app/data/models/product_model.dart';
+import 'package:ecommerce_mobile_app/logic/cubit/category_product_cubit/category_product_cubit.dart';
 import 'package:ecommerce_mobile_app/presentation/pages/cart_page/cart_page.dart';
 import 'package:ecommerce_mobile_app/presentation/pages/home_page/home_page.dart';
 import 'package:ecommerce_mobile_app/presentation/pages/login_page/login_page.dart';
+import 'package:ecommerce_mobile_app/presentation/pages/product/category_product_page.dart';
 import 'package:ecommerce_mobile_app/presentation/pages/product_details_page/product_details_page.dart';
 import 'package:ecommerce_mobile_app/presentation/pages/splash_page.dart';
 import 'package:ecommerce_mobile_app/presentation/providers/login_provider.dart';
 import 'package:ecommerce_mobile_app/presentation/pages/login_page/signup_page.dart';
 import 'package:ecommerce_mobile_app/presentation/providers/signup_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
 class Routes {
@@ -35,13 +39,24 @@ class Routes {
         );
       case ProductDetailsPage.routeName:
         return MaterialPageRoute(
-          builder: (_) =>  ProductDetailsPage(
+          builder: (_) => ProductDetailsPage(
             productModel: settings.arguments as ProductModel,
           ),
         );
-        case CartPage.routeName:
+      case CartPage.routeName:
         return MaterialPageRoute(
           builder: (_) => const CartPage(),
+        );
+      case CategoryProductPage.routeName:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => CategoryProductCubit(
+              settings.arguments as CategoryModel,
+            ),
+            child: CategoryProductPage(
+              category: settings.arguments as CategoryModel,
+            ),
+          ),
         );
 
       default:

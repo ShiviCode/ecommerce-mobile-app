@@ -1,8 +1,11 @@
+import 'package:ecommerce_mobile_app/logic/cubit/cart_cubit/cart_cubit.dart';
+import 'package:ecommerce_mobile_app/logic/cubit/cart_cubit/cart_state.dart';
 import 'package:ecommerce_mobile_app/presentation/pages/cart_page/cart_page.dart';
 import 'package:ecommerce_mobile_app/presentation/pages/home_page/category_segment.dart';
 import 'package:ecommerce_mobile_app/presentation/pages/home_page/home_segment.dart';
 import 'package:ecommerce_mobile_app/presentation/pages/home_page/profile_segement.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomePage extends StatefulWidget {
   static const routeName = "/home";
@@ -26,7 +29,15 @@ class _HomePageState extends State<HomePage> {
         title: const Text("Ecommerce app"),
         actions: [
           IconButton(
-            icon: const Icon(Icons.shopping_cart),
+            icon: BlocBuilder<CartCubit, CartCubitState>(
+              builder: (context, state) {
+                return Badge(
+                  isLabelVisible: state is CartLodingState ? false : true,
+                  label: Text(state.cartItems.length.toString()),
+                  child: const Icon(Icons.shopping_cart),
+                );
+              },
+            ),
             onPressed: () {
               Navigator.of(context).pushNamed(CartPage.routeName);
             },
