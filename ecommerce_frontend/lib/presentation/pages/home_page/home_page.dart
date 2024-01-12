@@ -32,7 +32,10 @@ class _HomePageState extends State<HomePage> {
             icon: BlocBuilder<CartCubit, CartCubitState>(
               builder: (context, state) {
                 return Badge(
-                  isLabelVisible: state is CartLodingState ? false : true,
+                  isLabelVisible:
+                      state is CartLodingState || state.cartItems.isEmpty
+                          ? false
+                          : true,
                   label: Text(state.cartItems.length.toString()),
                   child: const Icon(Icons.shopping_cart),
                 );

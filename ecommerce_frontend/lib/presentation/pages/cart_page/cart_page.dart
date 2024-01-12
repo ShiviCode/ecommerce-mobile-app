@@ -73,11 +73,12 @@ class _CartPageState extends State<CartPage> {
                         ),
                         trailing: InputQty(
                           minVal: 1,
-                          initVal: 2, // product initial value
+                          initVal: 1, // product initial value
                           //showMessageLimit: false,
                           onQtyChanged: (value) {
+                            print(value.runtimeType);
                             BlocProvider.of<CartCubit>(context)
-                                .addToCart(item.product!, value);
+                                .addToCart(item.product!, value.toInt());
                           },
                         ),
                       );

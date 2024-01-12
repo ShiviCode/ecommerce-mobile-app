@@ -4,8 +4,8 @@ import 'package:ecommerce_mobile_app/logic/cubit/category_product_cubit/category
 import 'package:ecommerce_mobile_app/presentation/pages/cart_page/cart_page.dart';
 import 'package:ecommerce_mobile_app/presentation/pages/home_page/home_page.dart';
 import 'package:ecommerce_mobile_app/presentation/pages/login_page/login_page.dart';
-import 'package:ecommerce_mobile_app/presentation/pages/product/category_product_page.dart';
 import 'package:ecommerce_mobile_app/presentation/pages/product_details_page/product_details_page.dart';
+import 'package:ecommerce_mobile_app/presentation/pages/product_page/category_product_page.dart';
 import 'package:ecommerce_mobile_app/presentation/pages/splash_page.dart';
 import 'package:ecommerce_mobile_app/presentation/providers/login_provider.dart';
 import 'package:ecommerce_mobile_app/presentation/pages/login_page/signup_page.dart';
