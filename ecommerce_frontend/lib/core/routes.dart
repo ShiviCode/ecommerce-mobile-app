@@ -40,7 +40,7 @@ class Routes {
       case ProductDetailsPage.routeName:
         return MaterialPageRoute(
           builder: (_) => ProductDetailsPage(
-            productModel: settings.arguments as ProductModel,
+            product: settings.arguments as ProductModel,
           ),
         );
       case CartPage.routeName:

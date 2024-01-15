@@ -1,14 +1,14 @@
 class CategoryModel {
   String? sId;
-  String? title;
-  String? description;
+  late String title;
+  late String description;
   String? updatedOn;
   String? createdOn;
 
   CategoryModel({
     this.sId,
-    this.title,
-    this.description,
+    required this.title,
+    required this.description,
     this.updatedOn,
     this.createdOn,
   });
@@ -22,12 +22,12 @@ class CategoryModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['_id'] = this.sId;
-    data['title'] = this.title;
-    data['description'] = this.description;
-    data['updatedOn'] = this.updatedOn;
-    data['createdOn'] = this.createdOn;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['_id'] = sId;
+    data['title'] = title;
+    data['description'] = description;
+    data['updatedOn'] = updatedOn;
+    data['createdOn'] = createdOn;
     return data;
   }
 }

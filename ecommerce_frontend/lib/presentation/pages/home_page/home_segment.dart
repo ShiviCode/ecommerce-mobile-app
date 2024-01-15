@@ -48,9 +48,10 @@ class _HomeSegmentState extends State<HomeSegment> {
                 child: Row(
                   children: [
                     CachedNetworkImage(
-                        width: MediaQuery.of(context).size.width / 3,
-                        imageUrl:
-                            'https://res.cloudinary.com/demo/image/upload/v1312461204/sample.jpg'),
+                      width: MediaQuery.of(context).size.width / 3,
+                      imageUrl: product.images[0],
+                      fit: BoxFit.contain,
+                    ),
                     Expanded(
                       child: Padding(
                         padding: const EdgeInsets.only(left: 25),
@@ -58,15 +59,12 @@ class _HomeSegmentState extends State<HomeSegment> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              product.title!,
+                              product.title,
                               style: TextStyles.heading4
                                   .copyWith(fontWeight: FontWeight.bold),
                             ),
                             Text(
-                              // product.description!.isEmpty
-                              //     ? product.description!
-                              //     :
-                              "No description",
+                              product.description,
                               style: TextStyles.body2.copyWith(
                                 color: AppColors.textLight,
                               ),

@@ -43,7 +43,7 @@ class _CategorySegmentState extends State<CategorySegment> {
                 );
               },
               leading: const Icon(Icons.category),
-              title: Text(category.title ?? "No Title"),
+              title: Text(category.title),
               trailing: const Icon(Icons.keyboard_arrow_right),
             );
           },

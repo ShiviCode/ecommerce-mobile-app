@@ -17,7 +17,10 @@ class _CartPageState extends State<CartPage> {
   double total = 0;
   double cartTotal(List<CartItemModel> items) {
     for (int i = 0; i < items.length; i++) {
-      total += items[i].product!.price! * items[i].quantity!;
+      //total = 0;
+      print(" before $total");
+      total += (items[i].product.price * items[i].quantity);
+      print(" after $total");
     }
     return total;
   }
@@ -54,16 +57,16 @@ class _CartPageState extends State<CartPage> {
                     itemBuilder: (context, index) {
                       final item = state.cartItems[index];
                       return ListTile(
-                        title: Text(item.product?.title ?? "No title"),
+                        title: Text(item.product.title),
                         subtitle: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                                '${item.product?.price} x ${item.quantity} = ${item.product!.price! * item.quantity!}'),
+                                '${item.product.price} x ${item.quantity} = ${item.product.price * item.quantity}'),
                             IconButton(
                                 onPressed: () {
                                   BlocProvider.of<CartCubit>(context)
-                                      .removeFromCart(item.product!);
+                                      .removeFromCart(item.product);
                                 },
                                 icon: const Icon(
                                   Icons.delete,
@@ -73,12 +76,11 @@ class _CartPageState extends State<CartPage> {
                         ),
                         trailing: InputQty(
                           minVal: 1,
-                          initVal: 1, // product initial value
+                          initVal: item.quantity, // product initial value
                           //showMessageLimit: false,
                           onQtyChanged: (value) {
-                            print(value.runtimeType);
                             BlocProvider.of<CartCubit>(context)
-                                .addToCart(item.product!, value.toInt());
+                                .addToCart(item.product, value.toInt());
                           },
                         ),
                       );

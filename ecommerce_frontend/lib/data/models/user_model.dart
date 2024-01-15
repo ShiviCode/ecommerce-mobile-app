@@ -1,8 +1,8 @@
 class UserModel {
   String? sId;
-  String? fullName;
-  String? email;
-  String? password;
+  late String fullName;
+  late String email;
+  late String password;
   String? phoneNumber;
   String? address;
   String? city;
@@ -14,9 +14,9 @@ class UserModel {
 
   UserModel({
     this.sId,
-    this.fullName,
-    this.email,
-    this.password,
+    required this.fullName,
+    required this.email,
+    required this.password,
     this.phoneNumber,
     this.address,
     this.city,

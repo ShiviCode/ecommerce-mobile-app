@@ -1,20 +1,20 @@
 class ProductModel {
   String? sId;
-  String? category;
-  String? title;
-  String? description;
-  int? price;
-  List<String>? images;
+  late String category;
+  late String title;
+  late String description;
+  late num price;
+  late List<String> images;
   String? updatedOn;
   String? createdOn;
 
   ProductModel(
       {this.sId,
-      this.category,
-      this.title,
-      this.description,
-      this.price,
-      this.images,
+      required this.category,
+      required this.title,
+      required this.description,
+      required this.price,
+      required this.images,
       this.updatedOn,
       this.createdOn});
 

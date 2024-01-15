@@ -65,16 +65,20 @@ class CartCubit extends Cubit<CartCubitState> {
   }
 
   bool cartContains(ProductModel product) {
-    if (state.cartItems.isEmpty) {
+    if (state.cartItems.isNotEmpty) {
+      // print(state.cartItems.isEmpty);
       final foundItem = state.cartItems
-          .where((item) => item.product!.sId! == product.sId)
+          .where((item) => item.product.sId! == product.sId)
           .toList();
 
       if (foundItem.isNotEmpty) {
         return true;
+      } else {
+        return false;
       }
+    } else {
+      return false;
     }
-    return false;
   }
 
   void removeFromCart(ProductModel product) async {

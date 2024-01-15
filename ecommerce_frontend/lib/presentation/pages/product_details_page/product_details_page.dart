@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ecommerce_mobile_app/core/ui.dart';
 import 'package:ecommerce_mobile_app/data/models/product_model.dart';
@@ -9,9 +10,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProductDetailsPage extends StatefulWidget {
   static const routeName = "product-details";
-  const ProductDetailsPage({super.key, required this.productModel});
+  const ProductDetailsPage({super.key, required this.product});
 
-  final ProductModel productModel;
+  final ProductModel product;
   @override
   State<ProductDetailsPage> createState() => _ProductDetailsPageState();
 }
@@ -21,7 +22,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.productModel.title ?? "No title"),
+        title: Text(widget.product.title),
       ),
       body: SafeArea(
         child: ListView(
@@ -29,46 +30,68 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
             SizedBox(
               height: MediaQuery.of(context).size.width,
               child: CarouselSlider.builder(
-                  itemCount: widget.productModel.images?.length ?? 3,
-                  itemBuilder: (context, index, realIdx) {
-                    return Container(
-                      child: Text(index.toString()),
-                    );
-                  },
-                  options: CarouselOptions()),
+                itemCount: widget.product.images.length,
+                itemBuilder: (context, index, realIdx) {
+                  return CachedNetworkImage(
+                    imageUrl: widget.product.images[index],
+                    // fit: BoxFit.contain,
+                  );
+                },
+                options: CarouselOptions(),
+              ),
             ),
             const Gap(),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Column(
-                //mainAxisSize: MainAxisSize.max,
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Text(widget.productModel.title ?? " Title"),
                   Text(
-                    widget.productModel.price.toString(),
+                    widget.product.title,
+                    style: TextStyles.heading2,
+                  ),
+                  Text(
+                    "₹ ${widget.product.price}",
                     style: TextStyles.heading3,
                   ),
                   const Gap(),
                   BlocBuilder<CartCubit, CartCubitState>(
                       builder: (context, state) {
                     return FilledButton(
-                      onPressed: () {
-                        if (BlocProvider.of<CartCubit>(context)
-                            .cartContains(widget.productModel)) {
-                          return;
-                        }
-                        BlocProvider.of<CartCubit>(context)
-                            .addToCart(widget.productModel, 1);
-                      },
+                      style: FilledButton.styleFrom(
+                          backgroundColor:
+                              // (BlocProvider.of<CartCubit>(context)
+                              //         .cartContains(widget.product))
+                              //     ? AppColors.textLight
+                              //     :
+                              AppColors.accent,
+                          maximumSize: MediaQuery.of(context).size),
+                      onPressed: (BlocProvider.of<CartCubit>(context)
+                              .cartContains(widget.product))
+                          ? null
+                          : () {
+                              BlocProvider.of<CartCubit>(context)
+                                  .addToCart(widget.product, 1);
+                            },
+                      // () {
+                      //   if (BlocProvider.of<CartCubit>(context)
+                      //       .cartContains(widget.product)) {
+                      //     return;
+                      //   }
+                      //   BlocProvider.of<CartCubit>(context)
+                      //       .addToCart(widget.product, 1);
+                      // },
                       child: (BlocProvider.of<CartCubit>(context)
-                              .cartContains(widget.productModel))
-                          ? const Text("Product Added to cart")
+                              .cartContains(widget.product))
+                          ? const Text("Product Added to cart...")
                           : const Text("Add to cart"),
                     );
                   }),
                   const Gap(),
-                  Text(widget.productModel.description ?? " no description"),
+                  Text(
+                    widget.product.description,
+                    style: TextStyles.body1,
+                  ),
                 ],
               ),
             ),
