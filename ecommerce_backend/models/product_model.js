@@ -5,9 +5,9 @@ import { Schema, model } from 'mongoose';
 const productSchema = Schema({
     category: { type: Schema.Types.ObjectId, ref: 'Category', required: true, },
     title: { type: String, required: [true, "title is required, pls provide"] },
-    description: { type: String, default: '', },
+    description: { type: String, required: true, },
     price: { type: Number, required: true, },
-    images: { type: Array, default: [], },
+    images: { type: Array, required: true, },
     updatedOn: { type: Date, },
     createdOn: { type: Date, }
 

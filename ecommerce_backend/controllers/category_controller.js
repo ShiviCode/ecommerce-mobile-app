@@ -33,7 +33,7 @@ const CategoryController = {
 
     fatchCategoryById: async function (req, res,) {
         try {
-            const id = req.params.id;
+            const id = req.params.categoryId;
             const foundCategory = await CategoryModel.findById(id); // get all categories
 
             if(!foundCategory){

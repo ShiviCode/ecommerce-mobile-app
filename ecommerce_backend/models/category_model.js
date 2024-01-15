@@ -4,7 +4,7 @@ import { Schema, model } from 'mongoose';
 
 const categorySchema = Schema({
     title: { type: String, required: [true, "title is required, pls provide"] },
-    description: { type: String, default: '', },
+    description: { type: String,  requried: [true, "description is required, pls provide"], },
     updatedOn: { type: Date, },
     createdOn: { type: Date, }
 

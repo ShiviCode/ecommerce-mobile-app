@@ -4,7 +4,7 @@ import { genSaltSync, hashSync } from 'bcrypt';
 
 const userSchema = Schema({
     id: { type: String, unique: true },
-    fullName: { type: String, default: '', },
+    fullName: { type: String, requried: true, },
     email: { type: String, unique: true, requried: true },
     password: { type: String, required: true },
     phoneNumber: { type: String, default: '', },
