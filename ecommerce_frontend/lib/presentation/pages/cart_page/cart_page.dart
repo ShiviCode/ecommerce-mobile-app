@@ -15,6 +15,7 @@ class CartPage extends StatefulWidget {
 
 class _CartPageState extends State<CartPage> {
   double total = 0;
+  // fix it
   double cartTotal(List<CartItemModel> items) {
     for (int i = 0; i < items.length; i++) {
       //total = 0;

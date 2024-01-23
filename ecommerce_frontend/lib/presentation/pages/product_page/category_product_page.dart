@@ -1,6 +1,7 @@
 import 'package:ecommerce_mobile_app/data/models/category_model.dart';
 import 'package:ecommerce_mobile_app/logic/cubit/category_product_cubit/category_product_cubit.dart';
 import 'package:ecommerce_mobile_app/logic/cubit/category_product_cubit/category_product_state.dart';
+import 'package:ecommerce_mobile_app/widgets/product_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -19,7 +20,7 @@ class _CategoryProductPageState extends State<CategoryProductPage> {
     final cubit = BlocProvider.of<CategoryProductCubit>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text("data"),
+        title: Text(cubit.category.title),
       ),
       body: SafeArea(
           child: BlocBuilder<CategoryProductCubit, CategoryProductState>(
@@ -36,10 +37,10 @@ class _CategoryProductPageState extends State<CategoryProductPage> {
           }
           if (state.products.isEmpty) {
             return const Center(
-              child: Text('No product'),
+              child: Text('No product found'),
             );
           }
-          return Center();
+          return ProductListView(products: state.products);
         },
       )),
     );

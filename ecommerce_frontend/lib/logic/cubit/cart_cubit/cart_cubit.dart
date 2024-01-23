@@ -21,6 +21,11 @@ class CartCubit extends Cubit<CartCubitState> {
         );
   }
 
+  void sortAndLoad(List<CartItemModel> items) {
+    items.sort((a, b) => b.product.title.compareTo(b.product.title));
+    emit(CartLoadedState(items));
+  }
+
   void _handleUserState(UserState userstate) {
     if (userstate is UserLoggedInState) {
       _initialize(userstate.userModel.sId!);
@@ -36,7 +41,7 @@ class CartCubit extends Cubit<CartCubitState> {
     try {
       List<CartItemModel> items =
           await _cartRepository.fetchCartForUser(userId);
-      emit(CartLoadedState(items));
+      sortAndLoad(items);
     } catch (ex) {
       emit(
         CartErrorState(ex.toString(), state.cartItems),
@@ -53,7 +58,8 @@ class CartCubit extends Cubit<CartCubitState> {
             CartItemModel(product: product, quantity: quantity);
         var updatedItem =
             await _cartRepository.addToCart(newItem, userSate.userModel.sId!);
-        emit(CartLoadedState(updatedItem));
+        sortAndLoad(updatedItem);
+        // emit(CartLoadedState(updatedItem));
       } else {
         throw "An Exception";
       }
@@ -89,7 +95,8 @@ class CartCubit extends Cubit<CartCubitState> {
 
         var updatedItem = await _cartRepository.removeFromCart(
             userSate.userModel.sId!, product.sId!);
-        emit(CartLoadedState(updatedItem));
+        sortAndLoad(updatedItem);
+        // emit(CartLoadedState(updatedItem));
       } else {
         throw "An error occured while removing the item";
       }
