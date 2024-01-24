@@ -6,6 +6,8 @@ class PrimaryTextField extends StatelessWidget {
   final TextEditingController? controller;
   final String labelText;
   final bool obscureText;
+  final String? initialValue;
+  final Function(String)? onChanged;
 
   const PrimaryTextField({
     super.key,
@@ -14,11 +16,15 @@ class PrimaryTextField extends StatelessWidget {
     this.obscureText = false,
     this.validator,
     this.suffix,
+    this.initialValue, 
+    this.onChanged,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onChanged: onChanged,
+      initialValue: initialValue,
       controller: controller,
       validator: validator,
       obscureText: obscureText,

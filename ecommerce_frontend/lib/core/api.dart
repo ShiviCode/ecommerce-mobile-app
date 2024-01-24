@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
-const String baseURL = "http://192.168.1.43:3000/api";
+const String baseURL = "http://192.168.1.40:3000/api";
 const Map<String, dynamic> header = {"content-type": "application/json"};
 
 class Api {

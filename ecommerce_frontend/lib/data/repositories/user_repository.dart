@@ -39,7 +39,6 @@ class UserRepository {
     }
   }
 
-
   Future<UserModel> signIn({
     required String email,
     required String password,
@@ -52,6 +51,27 @@ class UserRepository {
           "email": email,
           "password": password,
         }),
+      );
+
+      ApiResponse apiResponse = ApiResponse.fromResponse(response);
+
+      if (apiResponse.success) {
+        // return apiResponse(json) to user model;
+        return UserModel.fromJson(apiResponse.data);
+      }
+      // if success false throwing error
+      throw apiResponse.message.toString();
+    } catch (ex) {
+      rethrow;
+    }
+  }
+
+  Future<UserModel> updateUser({required UserModel userModel}) async {
+    try {
+      Response response = await _api.sendRequestDio.put(
+        "/user/${userModel.sId}",
+        //User input model for create account and covert it to json encode fromt the class
+        data: jsonEncode(userModel.toJson()),
       );
 
       ApiResponse apiResponse = ApiResponse.fromResponse(response);

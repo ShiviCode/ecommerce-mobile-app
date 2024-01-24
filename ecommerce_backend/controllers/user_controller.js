@@ -46,11 +46,32 @@ const userController = {
                 return res.json({ success: false, message: "User not found!" });
             }
            //
-            const isMatch =  bcrypt.compareSync(userData.password,foundUser.password);// comparePassword(foundUser.password);
+            const isMatch = bcrypt.compareSync(userData.password, foundUser.password);// comparePassword(foundUser.password);
             if (!isMatch) {
                 return res.json({ success: false, message: "Invalid password!" });
             }
             return res.json({ success: true, data: foundUser, message: "User logged in!" });
+        } catch (e) {
+            return res.json({ success: false, meaage: e });
+        }
+    },
+
+    updateUser: async (req, res) => {
+        try {
+            const userId = req.params.userId;
+            const updatedData = req.body;
+            const updatedUser = await UserModel.findOneAndUpdate(
+                { _id: userId },
+                updatedData,
+                { new: true }
+            );
+
+            if (!updatedUser) {
+                throw "User not found";
+            }
+
+            return res.json({ success: true, data: updatedUser, message: "User updated!" });
+
         } catch (e) {
             return res.json({ success: false, meaage: e });
         }

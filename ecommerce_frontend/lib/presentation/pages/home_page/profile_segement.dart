@@ -2,6 +2,7 @@ import 'package:ecommerce_mobile_app/core/ui.dart';
 import 'package:ecommerce_mobile_app/data/models/user_model.dart';
 import 'package:ecommerce_mobile_app/logic/cubit/user_cubit/user_cubit.dart';
 import 'package:ecommerce_mobile_app/logic/cubit/user_cubit/user_state.dart';
+import 'package:ecommerce_mobile_app/presentation/pages/user_page/edit_profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -52,8 +53,38 @@ class _ProfileSegementState extends State<ProfileSegement> {
           children: [
             Text(userModel.fullName, style: TextStyles.heading4),
             Text(userModel.email, style: TextStyles.body1),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed(EditProfilePage.routeName);
+              },
+              child: const Text("Edit profile"),
+            ),
           ],
-        )
+        ),
+        const Divider(),
+        ListTile(
+          contentPadding: EdgeInsets.zero,
+          onTap: () {},
+          leading: const Icon(
+            Icons.add_box,
+            color: Colors.red,
+          ),
+          title: Text("My orders", style: TextStyles.body1),
+        ),
+        ListTile(
+          contentPadding: EdgeInsets.zero,
+          onTap: () {
+            BlocProvider.of<UserCubit>(context).signOut();
+          },
+          leading: const Icon(
+            Icons.exit_to_app,
+            color: Colors.red,
+          ),
+          title: Text(
+            "Sign Out",
+            style: TextStyles.body1.copyWith(color: Colors.red),
+          ),
+        ),
       ],
     );
   }

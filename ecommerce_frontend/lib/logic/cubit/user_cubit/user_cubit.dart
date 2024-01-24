@@ -77,7 +77,29 @@ class UserCubit extends Cubit<UserState> {
     }
   }
 
-  void signOut()async{
+  Future<bool> updateUser(UserModel userModel) async {
+    emit(UserLodingState());
+    try {
+      UserModel updatedUser = await _userRepository.updateUser(
+          //calling api method
+          userModel: userModel);
+
+      // emitUserLoggedInState(
+      //   userModel: userModel,
+      //   email: email,
+      //   password: password,
+      // );
+      emit(UserLoggedInState(updatedUser));
+      return true;
+    } catch (e) {
+      emit(
+        UserErrorState(e.toString()), // Notifiying Listners
+      );
+      return false;
+    }
+  }
+
+  void signOut() async {
     await LocalStorage.deleteUserDetails();
     emit(UserLoggedOutState());
   }

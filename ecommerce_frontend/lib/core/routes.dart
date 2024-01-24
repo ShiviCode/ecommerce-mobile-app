@@ -7,6 +7,7 @@ import 'package:ecommerce_mobile_app/presentation/pages/login_page/login_page.da
 import 'package:ecommerce_mobile_app/presentation/pages/product_details_page/product_details_page.dart';
 import 'package:ecommerce_mobile_app/presentation/pages/product_page/category_product_page.dart';
 import 'package:ecommerce_mobile_app/presentation/pages/splash_page.dart';
+import 'package:ecommerce_mobile_app/presentation/pages/user_page/edit_profile_page.dart';
 import 'package:ecommerce_mobile_app/presentation/providers/login_provider.dart';
 import 'package:ecommerce_mobile_app/presentation/pages/login_page/signup_page.dart';
 import 'package:ecommerce_mobile_app/presentation/providers/signup_provider.dart';
@@ -57,6 +58,10 @@ class Routes {
               category: settings.arguments as CategoryModel,
             ),
           ),
+        );
+        case EditProfilePage.routeName:
+        return MaterialPageRoute(
+          builder: (_) => const EditProfilePage(),
         );
 
       default:
