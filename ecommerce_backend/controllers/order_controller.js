@@ -1,4 +1,5 @@
 import OrderModel from "../models/order_model.js";
+import CartModel from "../models/cart_model.js";
 
 const OrderController = {
 
@@ -11,10 +12,17 @@ const OrderController = {
             });
 
             await newOrder.save();
+
+            // Update the cart with the new order
+            // CartModel.findOneAndUpdate(
+            //     { user: user._id },
+            //     { items: [] },
+                
+            // );
             return res.json({ success: true, data: newOrder, message: "Order created!" });
         }
         catch (e) {
-            return res.json({ success: false, meaage: 'somethinf' });
+            return res.json({ success: false, message: 'something went wrong while creating orders' });
         }
     },
 
@@ -25,6 +33,7 @@ const OrderController = {
             const foundOrders = await OrderModel.find({
                 "user.id": userId
             });
+            //const foundOrders = await OrderModel.findById(userId); 
             return res.json({ success: true, data: foundOrders, message: "List of Orders" });
         }
         catch (e) {

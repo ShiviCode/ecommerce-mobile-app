@@ -1,6 +1,7 @@
 import 'package:ecommerce_mobile_app/data/models/cart_item_model.dart';
 import 'package:ecommerce_mobile_app/logic/cubit/cart_cubit/cart_cubit.dart';
 import 'package:ecommerce_mobile_app/logic/cubit/cart_cubit/cart_state.dart';
+import 'package:ecommerce_mobile_app/presentation/pages/order_page/order_detail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:input_quantity/input_quantity.dart';
@@ -80,6 +81,9 @@ class _CartPageState extends State<CartPage> {
                           initVal: item.quantity, // product initial value
                           //showMessageLimit: false,
                           onQtyChanged: (value) {
+                            if (value == item.quantity) {
+                              return;
+                            }
                             BlocProvider.of<CartCubit>(context)
                                 .addToCart(item.product, value.toInt());
                           },
@@ -103,7 +107,10 @@ class _CartPageState extends State<CartPage> {
                         ),
                       ),
                       FilledButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context)
+                              .pushNamed(OrderDetailPage.routeName);
+                        },
                         child: const Text("Place order"),
                       )
                     ],

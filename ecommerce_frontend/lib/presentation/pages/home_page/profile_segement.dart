@@ -2,6 +2,7 @@ import 'package:ecommerce_mobile_app/core/ui.dart';
 import 'package:ecommerce_mobile_app/data/models/user_model.dart';
 import 'package:ecommerce_mobile_app/logic/cubit/user_cubit/user_cubit.dart';
 import 'package:ecommerce_mobile_app/logic/cubit/user_cubit/user_state.dart';
+import 'package:ecommerce_mobile_app/presentation/pages/order_page/my_orders_page.dart';
 import 'package:ecommerce_mobile_app/presentation/pages/user_page/edit_profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -64,7 +65,9 @@ class _ProfileSegementState extends State<ProfileSegement> {
         const Divider(),
         ListTile(
           contentPadding: EdgeInsets.zero,
-          onTap: () {},
+          onTap: () {
+            Navigator.of(context).pushNamed(MyOrdersPage.routeName);
+          },
           leading: const Icon(
             Icons.add_box,
             color: Colors.red,

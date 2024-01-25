@@ -2,6 +2,7 @@ import 'package:ecommerce_mobile_app/core/routes.dart';
 import 'package:ecommerce_mobile_app/core/ui.dart';
 import 'package:ecommerce_mobile_app/logic/cubit/cart_cubit/cart_cubit.dart';
 import 'package:ecommerce_mobile_app/logic/cubit/category_cubit/category_cubit.dart';
+import 'package:ecommerce_mobile_app/logic/cubit/order_cubit/order_cubit.dart';
 import 'package:ecommerce_mobile_app/logic/cubit/product_cubit/product_cubit.dart';
 import 'package:ecommerce_mobile_app/logic/cubit/user_cubit/user_cubit.dart';
 import 'package:ecommerce_mobile_app/presentation/pages/splash_page.dart';
@@ -27,6 +28,10 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => ProductCubit()),
         BlocProvider(
           create: (context) => CartCubit(BlocProvider.of<UserCubit>(context)),
+        ),
+        BlocProvider(
+          create: (context) => OrderCubit(BlocProvider.of<UserCubit>(context),
+              BlocProvider.of<CartCubit>(context)),
         ),
       ],
       child: MaterialApp(

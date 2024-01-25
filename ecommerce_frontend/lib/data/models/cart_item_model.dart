@@ -16,10 +16,10 @@ class CartItemModel {
     sId = json['_id'];
   }
 
-  Map<String, dynamic> toJson() {
+  Map<String, dynamic> toJson({bool isWholeProduct = false}) {
     final Map<String, dynamic> data = <String, dynamic>{};
     //if (product != null) {
-      data['product'] = product.sId;
+      data['product'] = isWholeProduct ? product.sId : product;
     //}
     data['quantity'] = quantity;
     data['_id'] = sId;

@@ -4,6 +4,9 @@ import 'package:ecommerce_mobile_app/logic/cubit/category_product_cubit/category
 import 'package:ecommerce_mobile_app/presentation/pages/cart_page/cart_page.dart';
 import 'package:ecommerce_mobile_app/presentation/pages/home_page/home_page.dart';
 import 'package:ecommerce_mobile_app/presentation/pages/login_page/login_page.dart';
+import 'package:ecommerce_mobile_app/presentation/pages/order_page/my_orders_page.dart';
+import 'package:ecommerce_mobile_app/presentation/pages/order_page/order_detail_page.dart';
+import 'package:ecommerce_mobile_app/presentation/pages/order_page/order_placed_page.dart';
 import 'package:ecommerce_mobile_app/presentation/pages/product_details_page/product_details_page.dart';
 import 'package:ecommerce_mobile_app/presentation/pages/product_page/category_product_page.dart';
 import 'package:ecommerce_mobile_app/presentation/pages/splash_page.dart';
@@ -59,9 +62,21 @@ class Routes {
             ),
           ),
         );
-        case EditProfilePage.routeName:
+      case EditProfilePage.routeName:
         return MaterialPageRoute(
           builder: (_) => const EditProfilePage(),
+        );
+      case OrderDetailPage.routeName:
+        return MaterialPageRoute(
+          builder: (_) => const OrderDetailPage(),
+        );
+      case OrderPlacedPage.routeName:
+        return MaterialPageRoute(
+          builder: (_) => const OrderPlacedPage(),
+        );
+      case MyOrdersPage.routeName:
+        return MaterialPageRoute(
+          builder: (_) => const MyOrdersPage(),
         );
 
       default:
